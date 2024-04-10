@@ -1,21 +1,41 @@
-import { Text, View, Button,HomeScreen,ImageBackground } from 'react-native';
+import { Text, View, Button, } from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-//import { useFonts } from 'expo-font';
-//import { createNativeStackNavigator} from '@react-navigation/native-stack';
-import fundo from "./assets/fundo.png";
+import { createNativeStackNavigator} from '@react-navigation/native-stack';
+import fundo from './assets/fundo.png'
 
 
-
-  const Tab = createBottomTabNavigator();
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+       <ImageBackground source={fundo} >
+      <Text style={styles.text}>Elements</Text>
+      <Text style={styles.text}>in Front of</Text>
+      <Text style={styles.text}>Background</Text>
+    </ImageBackground>
+      <Text>Tela Inicial</Text>
+      <Button title='Sobre' onPress={()=> navigation.navigate("Sobre")}/> 
+          </View>
+  );
+}
+function Sobre({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Sobre</Text>
+      <Button title='Voltar' onPress={()=> navigation.goBack()}/> 
+    </View>
+  );
+}
+const Stack = createNativeStackNavigator();
+export default function App() {
+  return (
+    <NavigationContainer>
+       <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Sobre" component={Sobre} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
   
-  export default function App() {
-    return (
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    );
-  }
+  
+  
